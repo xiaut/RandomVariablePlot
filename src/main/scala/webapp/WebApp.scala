@@ -192,6 +192,25 @@ object WebApp {
     Plotly.newPlot(plotDiv, js.Array(data), layout, config)
 
     document.body.appendChild(plotDiv)
+
+    val sortedSeq = seq.sorted
+    val halfLength = sortedSeq.length/2
+    val median = if(sortedSeq.length % 2 == 0) {
+      (sortedSeq(halfLength - 1) + sortedSeq(halfLength))/2
+    } else {
+      sortedSeq(halfLength)
+    }
+    appendParagraph(s"Median : $median")
+
+    val mean = seq.sum/seq.length
+    val standardDeviation = math.sqrt(seq.map(x => math.pow(x - mean, 2)).sum/seq.length)
+    appendParagraph(s"Standard deviation : $standardDeviation")
+  }
+
+  def appendParagraph(text: String): Unit = {
+    var paragraphDiv = document.createElement("p")
+    paragraphDiv.textContent = text
+    document.body.appendChild(paragraphDiv)
   }
 
 }
