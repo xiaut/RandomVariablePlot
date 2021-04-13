@@ -8,4 +8,4 @@ sbt:RandomVariablePlot> fastLinkJS
 ```
 
 ## Launch
-Go to src/main/resources and open index.html with a navigator.
+Go to src/main/resources and open index.html in a navigator.
