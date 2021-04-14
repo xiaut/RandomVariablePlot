@@ -1,5 +1,6 @@
 package webapp
 
+import org.openmole.plotlyjs.PlotData.y
 import org.openmole.plotlyjs.Plotly
 import org.openmole.plotlyjs.PlotlyImplicits._
 import org.openmole.plotlyjs._
@@ -183,13 +184,18 @@ object WebApp {
       .title("Random variable")
       .showlegend(true)
 
-    val data = box
+    val points = scatter
+      .x((for(i <- 1 to seq.length) yield 0).toJSArray)
       .y(seq.toJSArray)
       .name("Values")
 
+    val boxplot = box
+      .y(seq.toJSArray)
+      .name("Boxplot")
+
     val config = Config.displayModeBar(false)
 
-    Plotly.newPlot(plotDiv, js.Array(data), layout, config)
+    Plotly.newPlot(plotDiv, js.Array(points, boxplot), layout, config)
 
     document.body.appendChild(plotDiv)
 
